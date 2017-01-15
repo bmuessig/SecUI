@@ -44,6 +44,7 @@
             this.btnAbout = new System.Windows.Forms.ToolStripButton();
             this.screen = new SecUI.SecScreen();
             this.keypad = new SecUI.SecKeypad();
+            this.loginLauncher = new System.ComponentModel.BackgroundWorker();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -186,6 +187,10 @@
             this.keypad.TabIndex = 2;
             this.keypad.ButtonPressed += new System.EventHandler<SecUI.SecKeypad.SecKeyEventArgs>(this.keypad_ButtonPressed);
             // 
+            // loginLauncher
+            // 
+            this.loginLauncher.DoWork += new System.ComponentModel.DoWorkEventHandler(this.loginLauncher_DoWork);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +231,7 @@
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripButton btnTextEntry;
+        private System.ComponentModel.BackgroundWorker loginLauncher;
 
     }
 }

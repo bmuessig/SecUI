@@ -53,32 +53,36 @@ namespace SecUI
                 SessionEngine = new SecAPI.Session.SessionEngine(baseUri.Uri, credentials);
                 SessionEngine.LogIn += new EventHandler<SecAPI.Session.ConnectionEventArgs>(SessionEngine_LogIn);
                 SessionEngine.LogOut += new EventHandler<EventArgs>(SessionEngine_LogOut);
-                SessionEngine.DoLogIn();
+
+                loginLauncher.RunWorkerAsync(SessionEngine);
             }
         }
 
-        void SessionEngine_LogOut(object sender, EventArgs e)
+        private void SessionEngine_LogOut(object sender, EventArgs e)
         {
             lblStatus.Text = "Disconnected.";
         }
 
         private void SessionEngine_LogIn(object sender, SecAPI.Session.ConnectionEventArgs e)
         {
-            if (e.Success)
+            this.Invoke((MethodInvoker)delegate
             {
-                KeyEngine.SessionID = e.SessionID;
-                ScreenEngine.Run();
-                KeyEngine.Run();
-                ToggleConnectionFields(true);
-                lblStatus.Text = "Connected.";
-                progressBar.Visible = false;
-            }
-            else
-            {
-                ToggleConnectionFields(false);
-                lblStatus.Text = "Connection failed!";
-                progressBar.Visible = false;
-            }
+                if (e.Success)
+                {
+                    KeyEngine.SessionID = e.SessionID;
+                    ScreenEngine.Run();
+                    KeyEngine.Run();
+                    ToggleConnectionFields(true);
+                    lblStatus.Text = "Connected.";
+                    progressBar.Visible = false;
+                }
+                else
+                {
+                    ToggleConnectionFields(false);
+                    lblStatus.Text = "Connection failed!";
+                    progressBar.Visible = false;
+                }
+            });
         }
 
         private void ToggleConnectionFields(bool IsConnected)
@@ -211,6 +215,11 @@ namespace SecUI
 
             if (wasRunning)
                 ScreenEngine.Run();
+        }
+
+        private void loginLauncher_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ((SecAPI.Session.SessionEngine)e.Argument).DoLogIn();
         }
     }
 }
