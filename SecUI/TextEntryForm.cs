@@ -36,7 +36,15 @@ namespace SecUI
             InitializeComponent();
 
             this.Screenshot = new Bitmap(Screenshot);
-            Type = AnalyzeScreenshot(Screenshot);
+            try
+            {
+                Type = AnalyzeScreenshot(Screenshot);
+            }
+            catch (Exception)
+            {
+                Type = EntryType.Unsupported;
+                MessageBox.Show("The image analysis failed! Falling back to no text entry supported.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /* *
@@ -47,25 +55,28 @@ namespace SecUI
          * 212, 13:   light (lc),   dark  (uc)
          * 216, 5 :   dark  (lc),   dark  (uc)
          * 222, 3 :   dark  (lc),   light (uc)
+         * 238, 0 :   dark  (lc),   dark  (uc)
          * 
          * */
 
         private EntryType AnalyzeScreenshot(Bitmap Screenshot)
         {
-            if (IsPointLight(Screenshot.GetPixel(237, 7)) &&
+            if ( IsPointLight(Screenshot.GetPixel(237, 7)) &&
                 !IsPointLight(Screenshot.GetPixel(216, 13)) &&
-                IsPointLight(Screenshot.GetPixel(212, 13)) &&
+                 IsPointLight(Screenshot.GetPixel(212, 13)) &&
                 !IsPointLight(Screenshot.GetPixel(216, 5)) &&
-                !IsPointLight(Screenshot.GetPixel(222, 3)))
+                !IsPointLight(Screenshot.GetPixel(222, 3)) &&
+                !IsPointLight(Screenshot.GetPixel(238, 0)))
             {
                 // We certainly have lowercase on and are allowed to enter stuff
                 return EntryType.CapsOff;
             }
             else if (!IsPointLight(Screenshot.GetPixel(237, 7)) &&
-              !IsPointLight(Screenshot.GetPixel(216, 13)) &&
-              !IsPointLight(Screenshot.GetPixel(212, 13)) &&
-              !IsPointLight(Screenshot.GetPixel(216, 5)) &&
-              IsPointLight(Screenshot.GetPixel(222, 3)))
+                     !IsPointLight(Screenshot.GetPixel(216, 13)) &&
+                     !IsPointLight(Screenshot.GetPixel(212, 13)) &&
+                     !IsPointLight(Screenshot.GetPixel(216, 5)) &&
+                      IsPointLight(Screenshot.GetPixel(222, 3)) &&
+                     !IsPointLight(Screenshot.GetPixel(238, 0)))
             {
                 return EntryType.CapsOn;
             }
@@ -92,7 +103,7 @@ namespace SecUI
             lblEntryStatus.Text = string.Format("The current screen {0} support text entry.", (Type == EntryType.Unsupported) ? "doesn't" : "does");
 
             if (Type != EntryType.Unsupported)
-                lblCapsStatus.Text = string.Format("Caps lock is currently {0}.", (Type == EntryType.CapsOn) ? "enabled" : "disabled");
+                lblCapsStatus.Text = string.Format("Capital letters are currently {0}.", (Type == EntryType.CapsOn) ? "enabled" : "disabled");
             else
             {
                 btnEnter.Enabled = false;
