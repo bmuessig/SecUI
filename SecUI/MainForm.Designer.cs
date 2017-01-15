@@ -57,7 +57,6 @@
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(266, 22);
             this.statusStrip.TabIndex = 0;
-            this.statusStrip.Text = "statusStrip1";
             // 
             // lblStatus
             // 
@@ -83,7 +82,6 @@
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(266, 25);
             this.toolStrip.TabIndex = 1;
-            this.toolStrip.Text = "toolStrip1";
             // 
             // tsbMenu
             // 
@@ -100,13 +98,13 @@
             this.tsbMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbMenu.Name = "tsbMenu";
             this.tsbMenu.Size = new System.Drawing.Size(51, 22);
-            this.tsbMenu.Text = "Menu";
+            this.tsbMenu.Text = "&Menu";
             // 
             // btnConnect
             // 
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(160, 22);
-            this.btnConnect.Text = "Connect";
+            this.btnConnect.Text = "&Connect";
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // btnDisconnect
@@ -114,7 +112,7 @@
             this.btnDisconnect.Enabled = false;
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(160, 22);
-            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.Text = "&Disconnect";
             this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // toolStripSeparator1
@@ -127,7 +125,7 @@
             this.btnTakeScreenshot.Enabled = false;
             this.btnTakeScreenshot.Name = "btnTakeScreenshot";
             this.btnTakeScreenshot.Size = new System.Drawing.Size(160, 22);
-            this.btnTakeScreenshot.Text = "Take Screenshot";
+            this.btnTakeScreenshot.Text = "Take Sc&reenshot";
             this.btnTakeScreenshot.Click += new System.EventHandler(this.btnTakeScreenshot_Click);
             // 
             // toolStripSeparator4
@@ -139,7 +137,7 @@
             // 
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(160, 22);
-            this.btnQuit.Text = "Quit";
+            this.btnQuit.Text = "Qui&t";
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // btnTextEntry
@@ -150,7 +148,7 @@
             this.btnTextEntry.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTextEntry.Name = "btnTextEntry";
             this.btnTextEntry.Size = new System.Drawing.Size(63, 22);
-            this.btnTextEntry.Text = "Text entry";
+            this.btnTextEntry.Text = "Te&xt entry";
             this.btnTextEntry.Click += new System.EventHandler(this.btnTextEntry_Click);
             // 
             // btnAbout
@@ -161,7 +159,7 @@
             this.btnAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(44, 22);
-            this.btnAbout.Text = "About";
+            this.btnAbout.Text = "&About";
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // screen
